@@ -1,84 +1,41 @@
+from PyQt5 import QtWidgets, uic
+from PyQt5.QtCore import QTimer
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtMultimedia import QSoundEffect
-from PySide6.QtCore import QUrl
-import PySide6.QtCore
 
-import os
-DOUBLE_CLICK_TIMER = 1500
-class MainWindow(QMainWindow):
+class Ui(QtWidgets.QMainWindow):
     def __init__(self):
-        super().__init__()
-        loader = QUiLoader()
-        self.mainmenu()
-    def mainmenu(self):
-        loader = QUiLoader()
-        self.ui = loader.load('test.ui')
-        self.ui.show()
-        #button clicked show yes
-        self.ui.pushButton.clicked.connect(self.yes)
-        self.ui.pushButton_2.clicked.connect(self.no)
-        self.ui.pushButton_3.clicked.connect(self.questionMark)
-        self.ui.pushButton_4.clicked.connect(self.altMenu)
-    def yes(self):
-        self.ui.pushButton.clicked.connect(self.yesAlt)
-        self.ui.pushButton_2.clicked.connect(self.no)
-        self.ui.pushButton_3.clicked.connect(self.questionMark)
-        self.ui.pushButton_4.clicked.connect(self.altMenu)
-       #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(DOUBLE_CLICK_TIMER, self.mainmenu)
-    def no(self):
-        self.ui.pushButton.clicked.connect(self.yes)
-        self.ui.pushButton_2.clicked.connect(self.noAlt)
-        self.ui.pushButton_3.clicked.connect(self.questionMark)
-        self.ui.pushButton_4.clicked.connect(self.altMenu)
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(DOUBLE_CLICK_TIMER, self.mainmenu)
-    def questionMark(self):
-        self.ui.pushButton.clicked.connect(self.yes)
-        self.ui.pushButton_2.clicked.connect(self.no)
-        self.ui.pushButton_3.clicked.connect(self.questionMarkAlt)
-        self.ui.pushButton_4.clicked.connect(self.altMenu)
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(DOUBLE_CLICK_TIMER, self.mainmenu)
-    def altMenu(self):
-        self.ui.pushButton.clicked.connect(self.yes)
-        self.ui.pushButton_2.clicked.connect(self.no)
-        self.ui.pushButton_3.clicked.connect(self.questionMark)
-        self.ui.pushButton_4.clicked.connect(self.altaltMenu)
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(DOUBLE_CLICK_TIMER, self.mainmenu)
-    def yesAlt(self):
-        loader = QUiLoader()
-        self.ui = loader.load('yes.ui')
-        self.ui.show()
-        effect = QSoundEffect()
-        effect.setSource(QUrl.fromLocalFile("yes.mp3"))
-        effect.setVolume(0.25)
-        effect.play()
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(3000, self.mainmenu)
-    def noAlt(self):
-        loader = QUiLoader()
-        self.ui = loader.load('no.ui')
-        self.ui.show()
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(3000, self.mainmenu)
-    def questionMarkAlt(self):
-        loader = QUiLoader()
-        self.ui = loader.load('question.ui')
-        self.ui.show()
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(3000, self.mainmenu)
-    def altaltMenu(self):
-        loader = QUiLoader()
-        self.ui = loader.load('altMenu.ui')
-        self.ui.show()
-        #go back to main window after 3 seconds
-        PySide6.QtCore.QTimer.singleShot(3000, self.mainmenu)
+        super(Ui, self).__init__()
+        self.mainMenu()
+    def mainMenu(self):
+        uic.loadUi('test.ui', self)
+        self.show()
+        #when button is clicked go to different ui
+        self.pushButton.clicked.connect(self.goToYes)
+        self.pushButton_2.clicked.connect(self.goToNo)
+        self.pushButton_3.clicked.connect(self.goToMaybe)
+        self.pushButton_4.clicked.connect(self.goToOther)
+    def goToYes(self):
+        self.pushButton.setStyleSheet("background-color: rgb(255, 255, 255);")
+        QTimer.singleShot(1000, self.resetcolors)
+    def goToNo(self):
+        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        QTimer.singleShot(1000, self.resetcolors)
+    def goToMaybe(self):
+        self.pushButton_3.setStyleSheet("background-color: rgb(255, 255, 255);")
+        QTimer.singleShot(1000, self.resetcolors)
+    def goToOther(self):
+        self.pushButton_4.setStyleSheet("background-color: rgb(255, 255, 255);")
+        QTimer.singleShot(1000, self.resetcolors)
+    def resetcolors(self):
+        self.pushButton.setStyleSheet("background-color: rgb(106, 106, 255);")
+        self.pushButton_2.setStyleSheet("background-color: rgb(255, 55, 55);")
+        self.pushButton_3.setStyleSheet("background-color: rgb(255, 255, 28);")
+        self.pushButton_4.setStyleSheet("background-color: rgb(130, 130, 130);")
+        self.mainMenu
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    sys.exit(app.exec())
+
+app = QtWidgets.QApplication(sys.argv)
+window = Ui()
+window.setFixedHeight(800)
+window.setFixedWidth(450)
+app.exec_()
