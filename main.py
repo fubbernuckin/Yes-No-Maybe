@@ -1,6 +1,15 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer
 import sys
+import os
+from gtts import gTTS
+from playsound import playsound
+
+def makeTTS(s):
+        temp =  os.getcwd()
+        temp = temp + s
+        playsound(temp)
+
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
@@ -9,11 +18,11 @@ class Ui(QtWidgets.QMainWindow):
     def mainMenu(self):
         uic.loadUi('maindev.ui', self)
         self.show()
-        #self.resetcolors()
+        self.resetcolors()
         #when button is clicked go to different ui
         self.pushButton.clicked.connect(self.goToYes)
-        self.pushButton_2.clicked.connect(self.goToNo)
-        self.pushButton_3.clicked.connect(self.goToMaybe)
+        self.pushButton_2.clicked.connect(self.goToMaybe)
+        self.pushButton_3.clicked.connect(self.goToNo)
         self.pushButton_4.clicked.connect(self.optionsPage)
     def goToYes(self):
         if(flashEnabled):
@@ -25,30 +34,36 @@ class Ui(QtWidgets.QMainWindow):
     
     def gotoYes2(self):
         #say yes
+        #makeTTS("/Yes.mp3")
+        print(self.pushButton.text())
         self.resetcolors()
 
     def goToNo(self):
         if(flashEnabled):
             self.flash(2)
         if(doubleClickEnabled):
-            self.pushButton_2.clicked.connect(self.goToNo2)
+            self.pushButton_3.clicked.connect(self.goToNo2)
         else:
             self.gotoNo2()
 
     def gotoNo2(self):
         #say no
+        #makeTTS("/No.mp3")
+        print(self.pushButton_3.text())
         self.resetcolors()
 
     def goToMaybe(self):
         if(flashEnabled):
             self.flash(3)
         if(doubleClickEnabled):
-            self.pushButton_3.clicked.connect(self.goToMaybe2)
+            self.pushButton_2.clicked.connect(self.goToMaybe2)
         else:
             self.gotoMaybe2()
 
     def gotoMaybe2(self):
         #say maybe
+        #makeTTS("/Maybe.mp3")
+        print(self.pushButton_2.text())
         self.resetcolors()
 
     def optionsPage(self):
@@ -59,15 +74,15 @@ class Ui(QtWidgets.QMainWindow):
     def resetcolors(self):
         if(colorBlindEnabled):
             self.pushButton.setStyleSheet(colorBlindGreen)
-            self.pushButton_2.setStyleSheet(colorBlindRed)
-            self.pushButton_3.setStyleSheet(colorBlindYellow)
+            self.pushButton_3.setStyleSheet(colorBlindRed)
+            self.pushButton_2.setStyleSheet(colorBlindYellow)
             self.pushButton_4.setStyleSheet(colorBlindGrey)
         else:
             self.pushButton.setStyleSheet(Green)
-            self.pushButton_2.setStyleSheet(Red)
-            self.pushButton_3.setStyleSheet(Yellow)
+            self.pushButton_3.setStyleSheet(Red)
+            self.pushButton_2.setStyleSheet(Yellow)
             self.pushButton_4.setStyleSheet(Grey)
-        self.mainMenu()
+        #self.mainMenu()
     
     def flash(self, buttonNum):
         if(buttonNum == 1):
@@ -79,7 +94,8 @@ class Ui(QtWidgets.QMainWindow):
         if(buttonNum == 4):
             self.pushButton_4.setStyleSheet(flashColor)
         QTimer.singleShot(flashTime, self.resetcolors)
-        
+
+
 class options(QtWidgets.QMainWindow):
     def __init__(self):
         super(options, self).__init__()
