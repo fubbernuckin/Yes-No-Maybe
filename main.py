@@ -6,15 +6,18 @@ import sys
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
         super(Ui, self).__init__()
+        self.initMainMenu()
+    def initMainMenu(self):
+        uic.loadUi('maindev.ui', self)
+        self.resetcolors()
         self.mainMenu()
     def mainMenu(self):
-        uic.loadUi('maindev.ui', self)
         self.show()
-        #self.resetcolors()
+        # self.resetcolors()
         #when button is clicked go to different ui
         self.pushButton.clicked.connect(self.goToYes)
-        self.pushButton_2.clicked.connect(self.goToNo)
-        self.pushButton_3.clicked.connect(self.goToMaybe)
+        self.pushButton_2.clicked.connect(self.goToMaybe)
+        self.pushButton_3.clicked.connect(self.goToNo)
         self.pushButton_4.clicked.connect(self.optionsPage)
     def goToYes(self):
         if(flashEnabled):
@@ -60,13 +63,13 @@ class Ui(QtWidgets.QMainWindow):
     def resetcolors(self):
         if(colorBlindEnabled):
             self.pushButton.setStyleSheet(Yes)
-            self.pushButton_2.setStyleSheet(colorBlindNo)
-            self.pushButton_3.setStyleSheet(colorBlindMaybe)
+            self.pushButton_2.setStyleSheet(colorBlindMaybe)
+            self.pushButton_3.setStyleSheet(colorBlindNo)
             # self.pushButton_4.setStyleSheet(colorBlindGrey)
         else:
             self.pushButton.setStyleSheet(Green)
-            self.pushButton_2.setStyleSheet(Red)
-            self.pushButton_3.setStyleSheet(Yellow)
+            self.pushButton_2.setStyleSheet(Yellow)
+            self.pushButton_3.setStyleSheet(Red)
             # self.pushButton_4.setStyleSheet(Grey)
         self.mainMenu()
     
