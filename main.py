@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer
+import menus.options
 import sys
 
 class Ui(QtWidgets.QMainWindow):
@@ -58,15 +59,15 @@ class Ui(QtWidgets.QMainWindow):
         
     def resetcolors(self):
         if(colorBlindEnabled):
-            self.pushButton.setStyleSheet(colorBlindGreen)
-            self.pushButton_2.setStyleSheet(colorBlindRed)
-            self.pushButton_3.setStyleSheet(colorBlindYellow)
-            self.pushButton_4.setStyleSheet(colorBlindGrey)
+            self.pushButton.setStyleSheet(Yes)
+            self.pushButton_2.setStyleSheet(colorBlindNo)
+            self.pushButton_3.setStyleSheet(colorBlindMaybe)
+            # self.pushButton_4.setStyleSheet(colorBlindGrey)
         else:
             self.pushButton.setStyleSheet(Green)
             self.pushButton_2.setStyleSheet(Red)
             self.pushButton_3.setStyleSheet(Yellow)
-            self.pushButton_4.setStyleSheet(Grey)
+            # self.pushButton_4.setStyleSheet(Grey)
         self.mainMenu()
     
     def flash(self, buttonNum):
@@ -79,11 +80,12 @@ class Ui(QtWidgets.QMainWindow):
         if(buttonNum == 4):
             self.pushButton_4.setStyleSheet(flashColor)
         QTimer.singleShot(flashTime, self.resetcolors)
-        
+
+
 class options(QtWidgets.QMainWindow):
     def __init__(self):
         super(options, self).__init__()
-        uic.loadUi('options.ui', self)
+        # uic.loadUi('options.ui', self)
         self.show()
         self.flashBox.setChecked(flashEnabled)
         self.doubleBox.setChecked(doubleClickEnabled)
@@ -114,14 +116,12 @@ flashTime = 500
 ttsEnabled = True
 colorBlindEnabled = True
 flashColor = "background-color: rgb(255, 255, 255);"
-colorBlindRed="background-color: rgb(255, 55, 55);"
-colorBlindGreen ="background-color: rgb(106, 106, 255);"
-colorBlindYellow="background-color: rgb(255, 255, 28);"
-colorBlindGrey="background-color: rgb(130, 130, 130);"
-Red="background-color: rgb(255, 0, 0);"
-Green="background-color: rgb(0, 255, 0);"
-Yellow="background-color: rgb(255, 255, 0);"
-Grey="background-color: rgb(128, 128, 128);"
+colorBlindNo="background-color: rgb(255, 55, 55);"
+colorBlindYes ="background-color: rgb(106, 106, 255);"
+colorBlindMaybe="background-color: rgb(255, 255, 28);"
+No="background-color: rgb(255, 55, 55);"
+Yes="background-color: rgb(10, 190, 10);"
+Maybe="background-color: rgb(255, 255, 28);"
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()

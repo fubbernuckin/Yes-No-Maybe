@@ -23,9 +23,15 @@
       <height>241</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="styleSheet">
-    <string notr="true">background-color: rgb(106, 106, 255);</string>
-   </property>
+     <string notr="true">background-color: rgb(106, 106, 255);</string>
+    </property>
     <property name="text">
      <string>YES</string>
     </property>
@@ -40,8 +46,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 28);</string>
-   </property>
+     <string notr="true">background-color: rgb(255, 255, 28);</string>
+    </property>
     <property name="text">
      <string>?</string>
     </property>
@@ -56,8 +62,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 55, 55);</string>
-   </property>
+     <string notr="true">background-color: rgb(255, 55, 55);</string>
+    </property>
     <property name="text">
      <string>NO</string>
     </property>
@@ -72,8 +78,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-    <string notr="true">background-color: rgb(130, 130, 130);</string>
-   </property>
+     <string notr="true">background-color: rgb(130, 130, 130);</string>
+    </property>
     <property name="text">
      <string>Settings</string>
     </property>
@@ -85,7 +91,7 @@
      <x>0</x>
      <y>0</y>
      <width>450</width>
-     <height>21</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>
