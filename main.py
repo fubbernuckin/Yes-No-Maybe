@@ -2,6 +2,7 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer
 import menus.options
 import sys
+from PyQt5.QtGui import QColor
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
@@ -11,6 +12,16 @@ class Ui(QtWidgets.QMainWindow):
         uic.loadUi('maindev.ui', self)
         self.show()
         #self.resetcolors()
+        if(colorBlindEnabled):
+            self.pushButton.setStyleSheet(colorBlindYes) 
+            self.pushButton_2.setStyleSheet(colorBlindMaybe)
+            self.pushButton_3.setStyleSheet(colorBlindNo)
+            # self.pushButton_4.setStyleSheet(colorBlindGrey)
+        else:
+            self.pushButton.setStyleSheet(Yes)
+            self.pushButton_2.setStyleSheet(Maybe)
+            self.pushButton_3.setStyleSheet(No)
+            # self.pushButton_4.setStyleSheet(Grey)
         #when button is clicked go to different ui
         self.pushButton.clicked.connect(self.goToYes)
         self.pushButton_2.clicked.connect(self.goToNo)
@@ -58,15 +69,16 @@ class Ui(QtWidgets.QMainWindow):
         self.options.show()
         
     def resetcolors(self):
+        global colorBlindEnabled
         if(colorBlindEnabled):
-            self.pushButton.setStyleSheet(Yes)
+            self.pushButton.setStyleSheet("background-color: %s;" % QColor(255, 0, 0).name())  
             self.pushButton_2.setStyleSheet(colorBlindNo)
             self.pushButton_3.setStyleSheet(colorBlindMaybe)
             # self.pushButton_4.setStyleSheet(colorBlindGrey)
         else:
-            self.pushButton.setStyleSheet(Green)
-            self.pushButton_2.setStyleSheet(Red)
-            self.pushButton_3.setStyleSheet(Yellow)
+            self.pushButton.setStyleSheet(Yes)
+            self.pushButton_2.setStyleSheet(No)
+            self.pushButton_3.setStyleSheet(Maybe)
             # self.pushButton_4.setStyleSheet(Grey)
         self.mainMenu()
     
@@ -85,7 +97,7 @@ class Ui(QtWidgets.QMainWindow):
 class options(QtWidgets.QMainWindow):
     def __init__(self):
         super(options, self).__init__()
-        # uic.loadUi('options.ui', self)
+        uic.loadUi('options.ui', self)
         self.show()
         self.flashBox.setChecked(flashEnabled)
         self.doubleBox.setChecked(doubleClickEnabled)
@@ -115,7 +127,7 @@ firstLoad = True
 flashTime = 500
 ttsEnabled = True
 colorBlindEnabled = True
-flashColor = "background-color: rgb(255, 255, 255);"
+flashColor = "background-color: rgb255, 255, 255);"
 colorBlindNo="background-color: rgb(255, 55, 55);"
 colorBlindYes ="background-color: rgb(106, 106, 255);"
 colorBlindMaybe="background-color: rgb(255, 255, 28);"
