@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #333333;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
@@ -33,7 +36,17 @@
      <string notr="true">background-color: rgb(106, 106, 255);</string>
     </property>
     <property name="text">
-     <string>YES</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Images/Yes.png</normaloff>Images/Yes.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>200</width>
+      <height>200</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -49,7 +62,17 @@
      <string notr="true">background-color: rgb(255, 255, 28);</string>
     </property>
     <property name="text">
-     <string>?</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Images/Maybe.png</normaloff>Images/Maybe.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>190</width>
+      <height>190</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -65,23 +88,45 @@
      <string notr="true">background-color: rgb(255, 55, 55);</string>
     </property>
     <property name="text">
-     <string>NO</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Images/No.png</normaloff>Images/No.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>390</x>
       <y>0</y>
       <width>61</width>
       <height>51</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(130, 130, 130);</string>
+     <string notr="true">background-color: none;
+color: none;
+border: none;</string>
     </property>
     <property name="text">
-     <string>Settings</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>Images/Settings.png</normaloff>Images/Settings.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>70</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -91,7 +136,7 @@
      <x>0</x>
      <y>0</y>
      <width>450</width>
-     <height>29</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
