@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer
-import menus.options
+# import menus.options
 import sys
 import os
 from PyQt5.QtGui import QColor
@@ -48,7 +48,7 @@ class Ui(QtWidgets.QMainWindow):
 
     def gotoYes2(self):
         #say yes
-        #makeTTS("/Yes.mp3")
+        makeTTS("/Yes.mp3")
         print(self.pushButton.text())
         self.resetcolors()
 
@@ -62,7 +62,7 @@ class Ui(QtWidgets.QMainWindow):
 
     def gotoNo2(self):
         #say no
-        #makeTTS("/No.mp3")
+        makeTTS("/No.mp3")
         print(self.pushButton_3.text())
         self.resetcolors()
 
@@ -76,7 +76,7 @@ class Ui(QtWidgets.QMainWindow):
 
     def gotoMaybe2(self):
         #say maybe
-        #makeTTS("/Maybe.mp3")
+        makeTTS("/Maybe.mp3")
         print(self.pushButton_2.text())
         self.resetcolors()
 

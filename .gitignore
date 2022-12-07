@@ -1,0 +1,2 @@
+#do not include .mp3 files in git
+*.mp3
