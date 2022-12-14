@@ -1,0 +1,148 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://screens/main/Yes.gd" type="Script" id=1]
+[ext_resource path="res://screens/main/No.gd" type="Script" id=2]
+[ext_resource path="res://screens/main/Maybe.gd" type="Script" id=3]
+[ext_resource path="res://main_theme.tres" type="Theme" id=4]
+[ext_resource path="res://screens/main/Settings.gd" type="Script" id=5]
+[ext_resource path="res://icons/Question_Mark.png" type="Texture" id=6]
+[ext_resource path="res://icons/Checkmark.png" type="Texture" id=7]
+[ext_resource path="res://icons/X_Mark.png" type="Texture" id=8]
+[ext_resource path="res://style boxes/No.tres" type="StyleBox" id=9]
+[ext_resource path="res://style boxes/Yes.tres" type="StyleBox" id=10]
+[ext_resource path="res://style boxes/Maybe.tres" type="StyleBox" id=11]
+[ext_resource path="res://screens/main/ClickTimer.gd" type="Script" id=12]
+[ext_resource path="res://screens/main/MaybeTimer.gd" type="Script" id=13]
+[ext_resource path="res://sounds/Yes.mp3" type="AudioStream" id=14]
+[ext_resource path="res://sounds/Maybe.mp3" type="AudioStream" id=15]
+[ext_resource path="res://sounds/No.mp3" type="AudioStream" id=16]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 360.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Settings" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 360.0
+margin_bottom = 75.0
+size_flags_horizontal = 3
+theme = ExtResource( 4 )
+text = "Settings"
+script = ExtResource( 5 )
+
+[node name="Yes" type="Button" parent="VBoxContainer"]
+margin_top = 75.0
+margin_right = 360.0
+margin_bottom = 263.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+script = ExtResource( 1 )
+
+[node name="Check" type="TextureRect" parent="VBoxContainer/Yes"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 100 )
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Yes"]
+stream = ExtResource( 14 )
+
+[node name="Maybe" type="Button" parent="VBoxContainer"]
+margin_top = 263.0
+margin_right = 360.0
+margin_bottom = 451.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 11 )
+custom_styles/normal = ExtResource( 11 )
+script = ExtResource( 3 )
+
+[node name="Question" type="TextureRect" parent="VBoxContainer/Maybe"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 100 )
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 3
+
+[node name="Timer" type="Timer" parent="VBoxContainer/Maybe"]
+script = ExtResource( 13 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Maybe"]
+stream = ExtResource( 15 )
+
+[node name="No" type="Button" parent="VBoxContainer"]
+margin_top = 451.0
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/hover = ExtResource( 9 )
+custom_styles/normal = ExtResource( 9 )
+script = ExtResource( 2 )
+
+[node name="X" type="TextureRect" parent="VBoxContainer/No"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 100, 100 )
+rect_scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/No"]
+stream = ExtResource( 16 )
+
+[node name="ClickTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+script = ExtResource( 12 )
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Settings" to="VBoxContainer/HBoxContainer/Settings" method="_on_Settings_pressed"]
+[connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/Yes" method="_on_Yes_button_up"]
+[connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/Maybe" method="_on_Yes_button_up"]
+[connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/No" method="_on_Yes_button_up"]
+[connection signal="button_up" from="VBoxContainer/Yes" to="ClickTimer" method="_on_Yes_button_up"]
+[connection signal="button_down" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe/Timer" method="_on_Maybe_button_down"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Yes" method="_on_Maybe_button_up"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe" method="_on_Maybe_button_up"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/No" method="_on_Maybe_button_up"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="ClickTimer" method="_on_Maybe_button_up"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe/Timer" method="_on_Maybe_button_up"]
+[connection signal="timeout" from="VBoxContainer/Maybe/Timer" to="VBoxContainer/Maybe" method="_on_Timer_timeout"]
+[connection signal="button_up" from="VBoxContainer/No" to="VBoxContainer/Yes" method="_on_No_button_up"]
+[connection signal="button_up" from="VBoxContainer/No" to="VBoxContainer/Maybe" method="_on_No_button_up"]
+[connection signal="button_up" from="VBoxContainer/No" to="VBoxContainer/No" method="_on_No_button_up"]
+[connection signal="button_up" from="VBoxContainer/No" to="ClickTimer" method="_on_No_button_up"]
+[connection signal="timeout" from="ClickTimer" to="VBoxContainer/Yes" method="_on_ClickTimer_timeout"]
+[connection signal="timeout" from="ClickTimer" to="VBoxContainer/Maybe" method="_on_ClickTimer_timeout"]
+[connection signal="timeout" from="ClickTimer" to="VBoxContainer/No" method="_on_ClickTimer_timeout"]

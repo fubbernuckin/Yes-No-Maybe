@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Maybe.mp3-fbaf73fc90971c4ea5507376ed3d3d5a.mp3str"
+
+[deps]
+
+source_file="res://sounds/Maybe.mp3"
+dest_files=[ "res://.import/Maybe.mp3-fbaf73fc90971c4ea5507376ed3d3d5a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -4,7 +4,7 @@
 font_path = "res://Roboto/Roboto-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 14
+size = 28
 font_data = SubResource( 1 )
 
 [resource]
