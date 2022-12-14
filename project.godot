@@ -14,6 +14,10 @@ config/name="yes-no-maybe"
 run/main_scene="res://screens/main/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Persist="*res://singleton/Persistence.tscn"
+
 [display]
 
 window/size/width=360

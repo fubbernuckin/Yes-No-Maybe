@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://screens/settings/Back.gd" type="Script" id=2]
+[ext_resource path="res://screens/settings/Color blind.gd" type="Script" id=3]
+[ext_resource path="res://screens/settings/Flash.gd" type="Script" id=4]
+[ext_resource path="res://screens/settings/Double click.gd" type="Script" id=5]
+[ext_resource path="res://screens/settings/Long press.gd" type="Script" id=6]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -11,7 +15,13 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Back" type="Button" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 360.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="ScrollContainer/VBoxContainer"]
 margin_right = 360.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 100, 50 )
@@ -20,4 +30,78 @@ theme = ExtResource( 1 )
 text = "Back"
 script = ExtResource( 2 )
 
-[connection signal="button_up" from="ScrollContainer/Back" to="ScrollContainer/Back" method="_on_Back_button_up"]
+[node name="Long press" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 360.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Long press"
+script = ExtResource( 6 )
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/Long press"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 4.0
+
+[node name="Color blind" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 360.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Color blind mode"
+script = ExtResource( 3 )
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/Color blind"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 4.0
+
+[node name="Double click" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 162.0
+margin_right = 360.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Double click"
+script = ExtResource( 5 )
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/Double click"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 4.0
+
+[node name="Flash" type="CheckBox" parent="ScrollContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 360.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 100, 50 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Flash"
+script = ExtResource( 4 )
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/Flash"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 4.0
+
+[connection signal="button_up" from="ScrollContainer/VBoxContainer/Back" to="ScrollContainer/VBoxContainer/Back" method="_on_Back_button_up"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Long press" to="ScrollContainer/VBoxContainer/Long press" method="_on_Long_press_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Long press" to="ScrollContainer/VBoxContainer/Double click" method="_on_Long_press_pressed"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/Color blind" to="ScrollContainer/VBoxContainer/Color blind" method="_on_Color_blind_toggled"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Double click" to="ScrollContainer/VBoxContainer/Long press" method="_on_Double_click_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Double click" to="ScrollContainer/VBoxContainer/Double click" method="_on_Double_click_pressed"]
+[connection signal="toggled" from="ScrollContainer/VBoxContainer/Flash" to="ScrollContainer/VBoxContainer/Flash" method="_on_Flash_toggled"]

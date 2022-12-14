@@ -12,7 +12,7 @@
 [ext_resource path="res://style boxes/Yes.tres" type="StyleBox" id=10]
 [ext_resource path="res://style boxes/Maybe.tres" type="StyleBox" id=11]
 [ext_resource path="res://screens/main/ClickTimer.gd" type="Script" id=12]
-[ext_resource path="res://screens/main/MaybeTimer.gd" type="Script" id=13]
+[ext_resource path="res://screens/main/HoldTimer.gd" type="Script" id=13]
 [ext_resource path="res://sounds/Yes.mp3" type="AudioStream" id=14]
 [ext_resource path="res://sounds/Maybe.mp3" type="AudioStream" id=15]
 [ext_resource path="res://sounds/No.mp3" type="AudioStream" id=16]
@@ -41,6 +41,9 @@ theme = ExtResource( 4 )
 text = "Settings"
 script = ExtResource( 5 )
 
+[node name="HoldTimer" type="Timer" parent="VBoxContainer/HBoxContainer/Settings"]
+wait_time = 0.5
+
 [node name="Yes" type="Button" parent="VBoxContainer"]
 margin_top = 75.0
 margin_right = 360.0
@@ -66,6 +69,9 @@ stretch_mode = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Yes"]
 stream = ExtResource( 14 )
+
+[node name="Timer" type="Timer" parent="VBoxContainer/Yes"]
+script = ExtResource( 13 )
 
 [node name="Maybe" type="Button" parent="VBoxContainer"]
 margin_top = 263.0
@@ -122,12 +128,16 @@ stretch_mode = 3
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/No"]
 stream = ExtResource( 16 )
 
+[node name="Timer" type="Timer" parent="VBoxContainer/No"]
+script = ExtResource( 13 )
+
 [node name="ClickTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 script = ExtResource( 12 )
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/Settings" to="VBoxContainer/HBoxContainer/Settings" method="_on_Settings_pressed"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/Settings" to="VBoxContainer/HBoxContainer/Settings" method="_on_Settings_button_down"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Settings" to="VBoxContainer/HBoxContainer/Settings" method="_on_Settings_button_up"]
+[connection signal="timeout" from="VBoxContainer/HBoxContainer/Settings/HoldTimer" to="VBoxContainer/HBoxContainer/Settings" method="_on_HoldTimer_timeout"]
 [connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/Yes" method="_on_Yes_button_up"]
 [connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/Maybe" method="_on_Yes_button_up"]
 [connection signal="button_up" from="VBoxContainer/Yes" to="VBoxContainer/No" method="_on_Yes_button_up"]
@@ -135,9 +145,9 @@ script = ExtResource( 12 )
 [connection signal="button_down" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe/Timer" method="_on_Maybe_button_down"]
 [connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Yes" method="_on_Maybe_button_up"]
 [connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe" method="_on_Maybe_button_up"]
+[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe/Timer" method="_on_Maybe_button_up"]
 [connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/No" method="_on_Maybe_button_up"]
 [connection signal="button_up" from="VBoxContainer/Maybe" to="ClickTimer" method="_on_Maybe_button_up"]
-[connection signal="button_up" from="VBoxContainer/Maybe" to="VBoxContainer/Maybe/Timer" method="_on_Maybe_button_up"]
 [connection signal="timeout" from="VBoxContainer/Maybe/Timer" to="VBoxContainer/Maybe" method="_on_Timer_timeout"]
 [connection signal="button_up" from="VBoxContainer/No" to="VBoxContainer/Yes" method="_on_No_button_up"]
 [connection signal="button_up" from="VBoxContainer/No" to="VBoxContainer/Maybe" method="_on_No_button_up"]
